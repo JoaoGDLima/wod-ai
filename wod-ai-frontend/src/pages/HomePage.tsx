@@ -5,6 +5,7 @@ import niveis from "../data/niveis.json";
 import objetivos from "../data/objetivos.json";
 import equipamentosData from "../data/equipamentos.json";
 import exerciciosData from "../data/exercicios.json";
+import Modal from "../components/Modal";
 
 export default function HomePage() {
   const [tipo, setTipo] = useState("");
@@ -14,6 +15,8 @@ export default function HomePage() {
   const [equipamentos, setEquipamentos] = useState<any[]>([]);
   const [evitarExercicios, setEvitarExercicios] = useState<any[]>([]);
   const [historico, setHistorico] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [wodData, setWodData] = useState<any>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,9 +49,29 @@ export default function HomePage() {
 
       const data = await response.json();
       console.log("WOD gerado:", data);
+
+      setWodData(data);
+      setModalVisible(true); // Exibir modal após receber o WOD 
     } catch (error) {
       console.error("Erro na requisição:", error);
     }
+  };
+
+  const handleSave = () => {
+    alert("WOD salvo com sucesso!");
+  };
+
+  const handleShare = () => {
+    alert("Compartilhado com sucesso!");
+  };
+
+  const handleDelete = () => {
+    setWodData(null);
+    setModalVisible(false);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
   };
 
   return (
@@ -139,6 +162,16 @@ export default function HomePage() {
           Gerar WOD
         </button>
       </form>
+
+      <Modal
+        isVisible={modalVisible}
+        data={wodData}
+        onClose={handleCloseModal}
+        onSave={handleSave}
+        onShare={handleShare}
+        onDelete={handleDelete}
+      />
+
     </div>
   );
 }
