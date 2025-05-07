@@ -22,9 +22,8 @@ Monte um treino no estilo CrossFit com base nas preferências abaixo:
 - Movimentos a evitar: ${evitarExercicios.join(', ') || 'nenhum'}
 - Histórico recente: ${historico.join(', ') || 'nenhum'}
 
-Formato da resposta:
+Formato da resposta deve ser um markdown:
 - Nome do WOD
-- Descrição curta motivacional
 - Lista de exercícios com reps claras
 - Observações finais (se necessário)
 
