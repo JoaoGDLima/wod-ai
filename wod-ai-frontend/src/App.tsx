@@ -1,14 +1,20 @@
 // src/App.jsx
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from "./components/Navbar";
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   return (
     <Router>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        
+        <Route element={<PrivateRoute />}>
+          <Route path="/home" element={<HomePage />} />
+        </Route>
       </Routes>
     </Router>
   );

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import axios from "axios"; // Importando axios para fazer a requisição HTTP
 import { useNavigate } from 'react-router-dom';
-
+import { useAuth } from "../hooks/useAuth";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +10,7 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false); // Para exibir "carregando" no botão
   const navigate = useNavigate(); 
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,13 +31,12 @@ const LoginPage = () => {
 
       // Se a resposta for bem-sucedida
       const { token } = response.data;
-      console.log("Token recebido:", token);
+      const fakeUser = {
+        name: "João",
+        avatarUrl: "https://i.pravatar.cc/40",
+      };
 
-      // Aqui você pode armazenar o token (exemplo com localStorage)
-      localStorage.setItem("token", token);
-
-      // Redirecionar ou mostrar página de sucesso
-      alert("Login bem-sucedido!");
+      login(fakeUser, token); 
       navigate('/home');
     } catch (error) {
       console.error("Erro no login", error);
