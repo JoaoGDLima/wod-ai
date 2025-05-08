@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaHome, FaUser, FaBars, FaTimes, FaSignOutAlt, FaSignInAlt } from "react-icons/fa";
+import { FaHome, FaUser, FaUserPlus, FaUsers, FaBars, FaTimes, FaSignOutAlt, FaSignInAlt, FaPlusCircle } from "react-icons/fa"; // Importando o ícone para o cadastro
 import { useAuth } from "../hooks/useAuth";
 
 export default function Navbar() {
@@ -32,6 +32,9 @@ export default function Navbar() {
         <Link to="/perfil" className={`flex items-center gap-1 ${linkStyle("/perfil")}`}>
           <FaUser /> Perfil
         </Link>
+        <Link to="/lista-atletas" className={`flex items-center gap-1 ${linkStyle("/lista-atletas")}`}>
+          <FaUsers /> Lista de Atletas
+        </Link>
         {user ? (
           <div className="flex items-center gap-3">
             <img
@@ -45,9 +48,11 @@ export default function Navbar() {
             </button>
           </div>
         ) : (
-          <Link to="/login" className="text-blue-600 flex items-center gap-1">
-            <FaSignInAlt /> Login
-          </Link>
+          <>
+            <Link to="/login" className="text-blue-600 flex items-center gap-1">
+              <FaSignInAlt /> Login
+            </Link>
+          </>
         )}
       </div>
 
@@ -78,9 +83,14 @@ export default function Navbar() {
               <FaSignOutAlt /> Logout
             </button>
           ) : (
-            <Link to="/login" onClick={toggleMenu} className="flex items-center gap-2 text-blue-600">
-              <FaSignInAlt /> Login
-            </Link>
+            <>
+              <Link to="/login" onClick={toggleMenu} className="flex items-center gap-2 text-blue-600">
+                <FaSignInAlt /> Login
+              </Link>
+              <Link to="/cadastro" onClick={toggleMenu} className="flex items-center gap-2 text-blue-600">
+                <FaPlusCircle /> Cadastro de Atleta
+              </Link>
+            </>
           )}
         </div>
       )}
