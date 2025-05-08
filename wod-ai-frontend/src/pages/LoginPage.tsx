@@ -32,7 +32,7 @@ const LoginPage = () => {
       // Se a resposta for bem-sucedida
       const { token } = response.data;
       const fakeUser = {
-        name: "João",
+        name: "João Guilherme Dedonatti de Lima",
         avatarUrl: "https://i.pravatar.cc/40",
       };
 
